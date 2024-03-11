@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.posjohonnyjavatecspring2023.ControllerToken">
+   <ImageView fitHeight="406.0" fitWidth="618.0" pickOnBounds="true">
+      <image>
+         <Image url="@images/img.png" />
+      </image>
+   </ImageView>
+   <VBox layoutX="70.0" layoutY="33.0" prefHeight="205.0" prefWidth="479.0">
+      <children>
+         <VBox prefHeight="29.0" prefWidth="479.0" />
+          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="618.0" text="Enter your activation Token">
+              <font>
+                  <Font name="Franklin Gothic Demi Cond" size="30.0" />
+              </font>
+          </Label>
+         <VBox prefHeight="53.0" prefWidth="479.0" />
+          <Label fx:id="errorLabelToken" alignment="CENTER_RIGHT" contentDisplay="TOP" prefHeight="29.0" prefWidth="479.0" textAlignment="CENTER" textFill="RED" />
+          <TextField fx:id="tokenInput" alignment="CENTER" onKeyPressed="#onKeyPressed" prefHeight="0.0" prefWidth="479.0" promptText="XXXXXX-XXXXXX-XXXXXX-XXXXXX" />
+         <VBox prefHeight="15.0" prefWidth="479.0" />
+      </children>
+   </VBox>
+   <VBox layoutX="239.0" layoutY="238.0" prefHeight="71.0" prefWidth="141.0">
+      <children>
+          <Button fx:id="activate" mnemonicParsing="false" onAction="#activateClicked" onMouseClicked="#activateClicked" prefHeight="25.0" prefWidth="479.0" style="-fx-background-color: #93d1de;" text="Activate" />
+
+                      <Hyperlink alignment="CENTER" contentDisplay="CENTER" ellipsisString="" prefHeight="23.0" prefWidth="143.0" style="-fx-background-color: black; visibility: 225;" text="Having any issues?" textAlignment="CENTER" underline="true" />
+      </children>
+   </VBox>
+   <Button fx:id="exitBtn" cancelButton="true" ellipsisString="X" layoutX="592.0" layoutY="2.0" mnemonicParsing="false" onAction="#exitClicked" onMouseClicked="#exitClicked" prefHeight="25.0" prefWidth="20.0" style="-fx-background-color: null;" text="X" textFill="RED" />
+</AnchorPane>
