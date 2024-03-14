@@ -19,7 +19,7 @@
                     <children>
                         <ImageView fx:id="food" fitHeight="224.0" fitWidth="241.0" pickOnBounds="true">
                             <image>
-                                <Image url="@../../../../../../../../OneDrive/Pictures/Screenshots/Screenshot%202023-06-10%20235109.png" />
+                                <Image url="@images/cashier.png" />
                             </image>
                         </ImageView>
                         <VBox alignment="CENTER" prefHeight="224.0" prefWidth="226.0">

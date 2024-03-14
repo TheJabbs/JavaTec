@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -15,9 +14,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import static com.example.posjohonnyjavatecspring2023.Main.getDefaultToken;
 
@@ -139,9 +135,8 @@ public class ControllerKitchen {
 
     }
     private void getPendingOrders() {
-        ObservableList<ObjectOrderList> pendingReceived = FXCollections.observableArrayList();
-        pendingReceived = connection.getAllOrderList();
-        if(!pending.equals(pendingReceived)) {
+        ObservableList<ObjectOrderList> pendingReceived = connection.getAllOrderList();
+        if(pending.size() != pendingReceived.size()) {
             pending = pendingReceived;
             pendingTable.setItems(pending);
             System.out.println("Updated");
