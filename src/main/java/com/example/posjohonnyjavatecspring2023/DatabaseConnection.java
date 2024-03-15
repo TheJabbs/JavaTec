@@ -198,7 +198,7 @@ public class DatabaseConnection {
                             resultSet.getString("food_name"), resultSet.getDouble("food_price"),
                             resultSet.getString("food_category_category").charAt(0),
                             getIngrediant(resultSet.getInt("food_id")),
-                            "src/main/resources/com/example/posjohonnyjavatecspring2023/Image Food/image-" + resultSet.getInt("restaurant_id") + ".png"));
+                            "com/example/posjohonnyjavatecspring2023/Image Food/image-" + resultSet.getInt("food_id") + ".png"));
                     System.out.print(food.toString());
                     i++;
                 }

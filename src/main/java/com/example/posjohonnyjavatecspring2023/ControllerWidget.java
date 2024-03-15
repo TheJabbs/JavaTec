@@ -33,7 +33,7 @@ public class ControllerWidget {
         try {
             image.setImage(new Image(food.getUrl()).isError() ? new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-0.png", 168, 89, false, true) : new Image(food.getUrl(), 168, 89, false, true));
         } catch (Exception e) {
-            image.setImage(new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-1.png", 168, 89, false, true));
+            image.setImage(new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-0.png", 168, 89, false, true));
         }
         price.setText(food.getPrice() + " $");
         this.food = food;
