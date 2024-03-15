@@ -75,5 +75,16 @@ public class ControllerDashboard {
         }
     }
 
+    @FXML
+    protected void onAdminbtnClick(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin-view.fxml"));
+            borderPane.setCenter(loader.load());
+            System.out.println("Admin clicked");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

@@ -3,6 +3,8 @@ package com.example.posjohonnyjavatecspring2023;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.MenuItem;
 
 
 import java.sql.*;
@@ -178,6 +180,7 @@ public class DatabaseConnection {
                 "WHERE restaurant_id = ? " +
                 "GROUP BY food.food_id, food.restaurant_id, food.food_name, food.food_price, food_category.food_category_id, food_category.food_category_category " +
                 "ORDER BY food.food_id ASC;";
+        System.out.println(querry);
         String querry2 = "Select count(*) from food where restaurant_id = ?";
         int count = 0;
         try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
@@ -303,5 +306,23 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
     }
-}
 
+    public CheckMenuItem[] getAllIngrediantNames(){
+        String querry = "Select ingrediant_names_id, ingrediant_name from ingrediant_names";
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
+             PreparedStatement statement = connection.prepareStatement(querry);
+             ResultSet resultSet = statement.executeQuery()) {
+            ArrayList<CheckMenuItem> ingrediantNames = new ArrayList<>();
+            while (resultSet.next()) {
+                CheckMenuItem menuItem = new CheckMenuItem(resultSet.getString("ingrediant_name"));
+                menuItem.setId(resultSet.getInt("ingrediant_names_id") + "");
+                ingrediantNames.add(menuItem);
+            }
+            return ingrediantNames.toArray(new CheckMenuItem[0]);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new CheckMenuItem[0];
+    }
+
+}

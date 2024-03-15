@@ -1,5 +1,8 @@
 package com.example.posjohonnyjavatecspring2023;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class ObjectFood {
     private int foodId;
     private double price;
@@ -79,6 +82,24 @@ public class ObjectFood {
 
     public void setFoodCategory(char foodCategory) {
         this.foodCategory = foodCategory;
+    }
+
+    public String getIngrediantsAsString() {
+        if (ingrediants == null || ingrediants.length == 0) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < ingrediants.length; i++) {
+            sb.append(ingrediants[i]);
+            if (i < ingrediants.length - 1) {
+                sb.append(", "); // Add comma and space between ingredients
+            }
+        }
+        return sb.toString();
+    }
+
+    public StringProperty ingrediantsProperty() {
+        return new SimpleStringProperty(getIngrediantsAsString());
     }
 
     @Override
