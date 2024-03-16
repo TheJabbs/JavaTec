@@ -6,14 +6,14 @@ public class ObjectEmployee {
     private int employeeId;
     private String employeeFname;
     private String employeeLname;
-    private String employeeStatus;
+    private char employeeStatus;
 
     // Constructors
     public ObjectEmployee() {
         // Default constructor
     }
 
-    public ObjectEmployee(int employeeId, String employeeFname, String employeeLname, String employeeStatus) {
+    public ObjectEmployee(int employeeId, String employeeFname, String employeeLname, char employeeStatus) {
         this.employeeId = employeeId;
         this.employeeFname = employeeFname;
         this.employeeLname = employeeLname;
@@ -33,7 +33,7 @@ public class ObjectEmployee {
         return employeeLname;
     }
 
-    public String getEmployeeStatus() {
+    public char getEmployeeStatus() {
         return employeeStatus;
     }
 
@@ -50,7 +50,7 @@ public class ObjectEmployee {
         this.employeeLname = employeeLname;
     }
 
-    public void setEmployeeStatus(String employeeStatus) {
+    public void setEmployeeStatus(char employeeStatus) {
         this.employeeStatus = employeeStatus;
     }
 

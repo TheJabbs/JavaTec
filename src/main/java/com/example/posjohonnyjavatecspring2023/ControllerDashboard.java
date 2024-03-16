@@ -24,7 +24,7 @@ public class ControllerDashboard {
     @FXML
     private Button clockOut;
     @FXML
-    private Button cashierbtn;
+    private Button adminbtn;
 
     DatabaseConnection connection = Main.getDefaultToken();
     public void initialize() {
@@ -32,6 +32,10 @@ public class ControllerDashboard {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateClock()));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+        System.out.println("\n\n" + connection.getEmployee().getEmployeeStatus() + "\n\n");
+        if(connection.getEmployee().getEmployeeStatus() != 'a'){
+            adminbtn.setDisable(true);
+        }
     }
     public void setGreet(){
         System.out.println("Setting greet");

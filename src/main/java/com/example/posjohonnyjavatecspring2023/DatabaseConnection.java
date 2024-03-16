@@ -64,7 +64,7 @@ public class DatabaseConnection {
 
 
     public boolean validateEmployee(String username, String password) {
-        String query = "SELECT employee_username, employee_password, employee_id, employee_lname, employee_fname FROM employee WHERE employee_username = ? AND employee_password = ? AND restaurant_id = ?";
+        String query = "SELECT employee_username, employee_status,employee_password, employee_id, employee_lname, employee_fname FROM employee WHERE employee_username = ? AND employee_password = ? AND restaurant_id = ?";
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -80,6 +80,7 @@ public class DatabaseConnection {
                     user.setEmployeeId(resultSet.getInt("employee_id"));
                     user.setEmployeeFname(resultSet.getString("employee_fname"));
                     user.setEmployeeLname(resultSet.getString("employee_lname"));
+                    user.setEmployeeStatus(resultSet.getString("employee_status").charAt(0));
                     System.out.println((user.getEmployeeLname().isBlank() ? "no lname" : user.getEmployeeLname()) + " " + (user.getEmployeeFname().isBlank() ? "no fname" : user.getEmployeeFname()) + " " + user.getEmployeeId());
 
                     System.out.println(user.getEmployeeId() + " " + user.getEmployeeFname() + " "
@@ -371,13 +372,14 @@ public class DatabaseConnection {
     }
 
     private void addCategories(int foodId, ArrayList<String> categories) {
-        String querry = "Insert into food_category (food_id, food_category_id) values (?,?)";
+        String querry = "Insert into food_category (food_id, food_category_category) values (?,?)";
         try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
              PreparedStatement statement = connection.prepareStatement(querry)) {
             for (String category : categories) {
                 statement.setInt(1, foodId);
                 statement.setInt(2, category.toLowerCase().charAt(0));
                 statement.executeUpdate();
+                System.out.println("Added to categorie");
             }
         } catch (SQLException e) {
             e.printStackTrace();

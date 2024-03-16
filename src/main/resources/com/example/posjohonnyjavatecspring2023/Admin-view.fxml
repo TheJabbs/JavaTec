@@ -63,6 +63,7 @@
                   </Label>
                </children>
             </VBox>
+            <Label fx:id="back" layoutX="16.0" layoutY="4.0" onMouseClicked="#onBackClicked" prefHeight="17.0" prefWidth="143.0" text="&lt;&lt; Back to dashboard" />
          </children>
       </AnchorPane>
    </left>

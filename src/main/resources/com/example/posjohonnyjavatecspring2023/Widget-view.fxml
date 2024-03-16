@@ -26,7 +26,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="price" alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="157.0" text="Price">
+                        <Label fx:id="price" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="185.0" text="Price">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>

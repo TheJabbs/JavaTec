@@ -1,16 +1,16 @@
 package com.example.posjohonnyjavatecspring2023;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class ControllerAdmin {
     @FXML
     private ImageView imageFood;
     @FXML
-    private Label notice;
+    private Label notice, back;
     private DatabaseConnection connection = Main.getDefaultToken();
 
     public void initialize() {
@@ -117,7 +117,7 @@ public class ControllerAdmin {
             e.printStackTrace();
         }
 
-        if (!iFname.getText().isEmpty() && !ingrediants.isEmpty() && !categorie.isEmpty() && price > 0) {
+        if (!iFname.getText().isEmpty() && !categorie.isEmpty() && price > 0) {
             connection.addFood(iFname.getText(), price, ingrediants, categorie);
             ObservableList foods = connection.getAllFood();
             menuItems.setItems(foods);
@@ -156,6 +156,17 @@ public class ControllerAdmin {
             connection.deleteFood(food.getFoodId());
             ObservableList foods = connection.getAllFood();
             menuItems.setItems(foods);
+        }
+    }
+
+    @FXML
+    public void onBackClicked(){
+        Stage stage = (Stage) back.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard-view.fxml"));
+        try {
+            stage.getScene().setRoot(loader.load());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
