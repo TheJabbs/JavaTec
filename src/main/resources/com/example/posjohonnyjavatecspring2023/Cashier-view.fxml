@@ -30,7 +30,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <ScrollPane prefHeight="111.0" prefWidth="822.0" style="-fx-focus-color: white;">
+                                <ScrollPane onScroll="#onScroll" prefHeight="111.0" prefWidth="822.0" style="-fx-focus-color: white; -fx-hbar-policy: never; -fx-vbar-policy: never;">
                                     <content>
                                         <GridPane fx:id="gridOffers" prefHeight="109.0" prefWidth="168.0">
                                             <columnConstraints>
@@ -47,7 +47,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <ScrollPane prefHeight="111.0" prefWidth="822.0" style="-fx-focus-color: white;">
+                                <ScrollPane onScroll="#onScroll" prefHeight="111.0" prefWidth="822.0" style="-fx-focus-color: white; -fx-hbar-policy: never; -fx-vbar-policy: never;">
                                     <content>
                                         <GridPane fx:id="gridC" prefHeight="109.0" prefWidth="168.0">
                                             <columnConstraints>
@@ -64,7 +64,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <ScrollPane prefHeight="111.0" prefWidth="822.0" style="-fx-focus-color: white;">
+                                <ScrollPane onScroll="#onScroll" prefHeight="111.0" prefWidth="822.0" style="-fx-focus-color: white; -fx-hbar-policy: never; -fx-vbar-policy: never;">
                                     <content>
                                         <GridPane fx:id="gridB" prefHeight="109.0" prefWidth="168.0">
                                             <columnConstraints>
@@ -81,7 +81,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <ScrollPane prefHeight="111.0" prefWidth="822.0" style="-fx-focus-color: white;">
+                                <ScrollPane onScroll="#onScroll" prefHeight="111.0" prefWidth="822.0" style="-fx-focus-color: white; -fx-hbar-policy: never; -fx-vbar-policy: never;">
                                     <content>
                                         <GridPane fx:id="gridD" prefHeight="109.0" prefWidth="168.0">
                                             <columnConstraints>

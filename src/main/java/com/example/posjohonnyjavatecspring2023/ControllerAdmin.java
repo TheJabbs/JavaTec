@@ -121,13 +121,7 @@ public class ControllerAdmin {
             connection.addFood(iFname.getText(), price, ingrediants, categorie);
             ObservableList foods = connection.getAllFood();
             menuItems.setItems(foods);
-            int id = connection.getFoodId(iFname.getText());
 
-            File file = new File("src/main/resources/com/example/posjohonnyjavatecspring2023/Image Food/image-" + id + ".png");
-            if (file.exists()) {
-                file.delete();
-            }
-            //connection.saveImage(file, imageFood.getImage());
             System.out.println("Success");
             clearEntry();
             notice.setText("Operation Successful");
@@ -143,8 +137,8 @@ public class ControllerAdmin {
     }
 
     public void clearEntry() {
-        iFname.clear();
-        iCost.clear();
+        iFname.setText("");
+        iCost.setText("");
         iIngrediants.getItems().clear();
         iCategory.getItems().clear();
     }

@@ -5,11 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -67,6 +65,8 @@ public class ControllerCashier {
         total.setCellValueFactory(new PropertyValueFactory<>("total"));
 
         showWidget();
+
+
     }
 
     private void showWidget() {
@@ -195,6 +195,17 @@ public class ControllerCashier {
         return bPane;
     }
 
+    @FXML
+    public void onScroll(ScrollEvent event) {
+        double deltaY = event.getDeltaY();
+        double deltaX = event.getDeltaX();
+        ScrollPane scrollPane = (ScrollPane) event.getSource();
+
+        scrollPane.setHvalue(scrollPane.getHvalue() - deltaY / scrollPane.getContent().getBoundsInLocal().getWidth());
+        scrollPane.setVvalue(scrollPane.getVvalue() - deltaX / scrollPane.getContent().getBoundsInLocal().getHeight());
+
+        event.consume();
+    }
 
 }
 

@@ -179,7 +179,6 @@ public class DatabaseConnection {
                 "WHERE restaurant_id = ? " +
                 "GROUP BY food.food_id, food.restaurant_id, food.food_name, food.food_price, food_category.food_category_id, food_category.food_category_category " +
                 "ORDER BY food.food_id ASC;";
-        System.out.println(querry);
         String querry2 = "Select count(*) from food where restaurant_id = ?";
         int count = 0;
         try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
@@ -377,7 +376,8 @@ public class DatabaseConnection {
              PreparedStatement statement = connection.prepareStatement(querry)) {
             for (String category : categories) {
                 statement.setInt(1, foodId);
-                statement.setInt(2, category.toLowerCase().charAt(0));
+                String cat = category.charAt(0) + "";
+                statement.setString(2, cat.toLowerCase());
                 statement.executeUpdate();
                 System.out.println("Added to categorie");
             }
