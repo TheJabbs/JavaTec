@@ -1,11 +1,9 @@
 package com.example.posjohonnyjavatecspring2023;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.MenuItem;
-
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -323,6 +321,113 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
         return new CheckMenuItem[0];
+    }
+
+    public void addFood(String name, double price, ArrayList<String> ingrediants, ArrayList<String> categories) {
+        String querry = "Insert into food (restaurant_id, food_name, food_price) values (?,?,?)";
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
+             PreparedStatement statement = connection.prepareStatement(querry)) {
+            statement.setInt(1, restaurantId);
+            statement.setString(2, name);
+            statement.setDouble(3, price);
+            statement.executeUpdate();
+            int id = getLastFoodId();
+            addIngrediants(id, ingrediants);
+            addCategories(id, categories);
+            System.out.println("Added food with id: " + id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getLastFoodId() {
+        String querry = "Select food_id from food where restaurant_id = ? order by food_id desc limit 1";
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
+             PreparedStatement statement = connection.prepareStatement(querry)) {
+            statement.setInt(1, restaurantId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("food_id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    private void addIngrediants(int foodId, ArrayList<String> ingrediants) {
+        String querry = "Insert into ingrediant (food_id, ingrediant_names_id) values (?,?)";
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
+             PreparedStatement statement = connection.prepareStatement(querry)) {
+            for (String ingrediant : ingrediants) {
+                statement.setInt(1, foodId);
+                statement.setInt(2, getIngrediantId(ingrediant));
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addCategories(int foodId, ArrayList<String> categories) {
+        String querry = "Insert into food_category (food_id, food_category_id) values (?,?)";
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
+             PreparedStatement statement = connection.prepareStatement(querry)) {
+            for (String category : categories) {
+                statement.setInt(1, foodId);
+                statement.setInt(2, category.toLowerCase().charAt(0));
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public int getFoodId(String name){
+        String querry = "Select food_id from food where restaurant_id = ? and food_name = ?";
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
+             PreparedStatement statement = connection.prepareStatement(querry)) {
+            statement.setInt(1, restaurantId);
+            statement.setString(2, name);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("food_id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getIngrediantId(String ingrediantName) {
+        String querry = "Select ingrediant_names_id from ingrediant_names where ingrediant_name = ?";
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
+             PreparedStatement statement = connection.prepareStatement(querry)) {
+            statement.setString(1, ingrediantName);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("ingrediant_names_id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void deleteFood(int id) {
+        String querry = "Delete from food where food_id = ?";
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
+             PreparedStatement statement = connection.prepareStatement(querry)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            System.out.println("Deleted food with id: " + id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -76,8 +78,8 @@
                   <TableColumn fx:id="ingrediants" editable="false" prefWidth="566.0" text="Ingrediant" />
               </columns>
             </TableView>
-            <Button fx:id="delBtn" layoutX="15.0" layoutY="526.0" mnemonicParsing="false" text="Delete" />
-            <HBox layoutX="250.0" layoutY="598.0" prefHeight="37.0" prefWidth="816.0">
+            <Button fx:id="delBtn" layoutX="15.0" layoutY="526.0" mnemonicParsing="false" onAction="#onDelClicked" text="Delete" />
+            <HBox alignment="CENTER" layoutX="140.0" layoutY="551.0" prefHeight="176.0" prefWidth="816.0">
                <children>
                   <TextField fx:id="iFname" promptText="Food Name" />
                   <Pane prefHeight="37.0" prefWidth="10.0" />
@@ -85,18 +87,25 @@
                   <Pane prefHeight="37.0" prefWidth="10.0" />
                   <SplitMenuButton fx:id="iCategory" mnemonicParsing="false" text="Category">
                     <items>
-                        <CheckMenuItem mnemonicParsing="false"  text="Meat" />
-                        <CheckMenuItem mnemonicParsing="false"  text="Chicken" />
-                        <CheckMenuItem mnemonicParsing="false"  text="Drink" />
-                        <CheckMenuItem mnemonicParsing="false"  text="Special" />
+                        <CheckMenuItem mnemonicParsing="false" text="Meat" />
+                        <CheckMenuItem mnemonicParsing="false" text="Chicken" />
+                        <CheckMenuItem mnemonicParsing="false" text="Drink" />
+                        <CheckMenuItem mnemonicParsing="false" text="Special" />
                     </items>
                   </SplitMenuButton>
                   <Pane prefHeight="37.0" prefWidth="10.0" />
                   <SplitMenuButton fx:id="iIngrediants" ellipsisString="" mnemonicParsing="false" prefHeight="25.0" prefWidth="229.0" text="Ingrediants" />
                   <Pane prefHeight="37.0" prefWidth="10.0" />
-                  <Button fx:id="addBtn" mnemonicParsing="false" text="Add" />
+                  <ImageView fx:id="imageFood" fitHeight="150.0" fitWidth="181.0" onDragDropped="#imageViewDropped" onDragOver="#imageViewDragOver" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Image Food/image-0.png" />
+                     </image>
+                  </ImageView>
+                  <Pane prefHeight="37.0" prefWidth="10.0" />
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#onClickAdd" prefHeight="25.0" prefWidth="45.0" text="Add" />
                </children>
             </HBox>
+            <Label fx:id="notice" layoutX="950.0" layoutY="631.0" prefHeight="17.0" prefWidth="141.0" textFill="RED" />
          </children>
       </AnchorPane>
    </center>
