@@ -1,0 +1,51 @@
+/* styles.css */
+
+.button {
+    -fx-background-color: #ff7f50; /* Coral */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px; /* Adjust padding as needed */
+    -fx-border-radius: 4px; /* Rounded corners */
+    -fx-background-radius: 4px; /* Rounded corners */
+    -fx-cursor: hand; /* Change cursor to hand on hover */
+}
+
+.button:hover {
+    -fx-background-color: #ff6347; /* Darker coral on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #d1552c; /* Dark coral when pressed */
+}
+/* styles.css */
+
+/* Define a style class for AnchorPanes with drop shadows */
+.shadow-pane {
+    -fx-background-color: white; /* Set the background color */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 0); /* Apply drop shadow effect */
+}
+/* styles.css */
+
+/* Widget button style */
+.widget-button {
+    -fx-background-color: #3fe2e8; /* Button background color */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-font-weight: bold; /* Font weight */
+    -fx-padding: 8px 16px; /* Padding */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-border-color: #3fe2e8; /* Border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-cursor: hand; /* Cursor on hover */
+}
+
+/* Hover effect */
+.widget-button:hover {
+    -fx-background-color: #31c5d4; /* Darker background color on hover */
+}
+
+/* Pressed effect */
+.widget-button:pressed {
+    -fx-background-color: #28afb8; /* Even darker background color when pressed */
+}

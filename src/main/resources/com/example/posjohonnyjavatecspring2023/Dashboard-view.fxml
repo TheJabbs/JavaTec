@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="817.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.posjohonnyjavatecspring2023.ControllerDashboard">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="817.0" prefWidth="1290.0" stylesheets="@CSS/button.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.posjohonnyjavatecspring2023.ControllerDashboard">
    <top>
-      <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #2074fa;" BorderPane.alignment="CENTER">
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="1290.0" style="-fx-background-color: #eb5a44;" BorderPane.alignment="CENTER">
         <items>
           <Button fx:id="clockOut" mnemonicParsing="false" onAction="#clickOutClicked" text="Clock out" />
             <Label fx:id="greet" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="190.0" style="-fx-background-color: black;" textAlignment="CENTER" textFill="WHITE">
@@ -21,7 +21,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Pane prefHeight="35.0" prefWidth="939.0" />
+            <Pane prefHeight="35.0" prefWidth="902.0" />
             <Label fx:id="timeL" prefHeight="23.0" prefWidth="62.0" textFill="WHITE" />
         </items>
       </ToolBar>
@@ -32,7 +32,7 @@
             <HBox layoutX="48.0" layoutY="101.0" prefHeight="277.0" prefWidth="1194.0">
                <children>
                   <Pane prefHeight="359.0" prefWidth="92.0" />
-                  <Button fx:id="cashierbtn" mnemonicParsing="false" onAction="#onCashierbtnClick" prefHeight="322.0" prefWidth="337.0" style="-fx-background-color: #11e3fa;">
+                  <Button fx:id="cashierbtn" mnemonicParsing="false" onAction="#onCashierbtnClick" prefHeight="322.0" prefWidth="337.0" style="-fx-background-color: #eb7d6c;" styleClass="widget-button">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -45,7 +45,7 @@
                      </graphic>
                   </Button>
                   <Pane prefHeight="359.0" prefWidth="57.0" />
-                  <Button fx:id="kitchenbtn" mnemonicParsing="false" onAction="#onKitchenbtnClick" prefHeight="322.0" prefWidth="333.0" style="-fx-background-color: #11e3fa;">
+                  <Button fx:id="kitchenbtn" mnemonicParsing="false" onAction="#onKitchenbtnClick" prefHeight="322.0" prefWidth="333.0" style="-fx-background-color: #eb7d6c;" styleClass="widget-button">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -58,7 +58,7 @@
                      </graphic>
                   </Button>
                   <Pane prefHeight="359.0" prefWidth="57.0" />
-                  <Button fx:id="reservationbtn" mnemonicParsing="false" prefHeight="322.0" prefWidth="333.0" style="-fx-background-color: #11e3fa;">
+                  <Button fx:id="reservationbtn" mnemonicParsing="false" prefHeight="322.0" prefWidth="333.0" style="-fx-background-color: #eb7d6c;" styleClass="widget-button">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -76,7 +76,7 @@
             <HBox layoutX="48.0" layoutY="411.0" prefHeight="277.0" prefWidth="1194.0">
                <children>
                   <Pane prefHeight="359.0" prefWidth="92.0" />
-                  <Button fx:id="adminbtn" mnemonicParsing="false" onAction="#onAdminbtnClick" prefHeight="322.0" prefWidth="337.0" style="-fx-background-color: #11e3fa;">
+                  <Button fx:id="adminbtn" mnemonicParsing="false" onAction="#onAdminbtnClick" prefHeight="322.0" prefWidth="337.0" style="-fx-background-color: #eb7d6c;" styleClass="widget-button">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -89,13 +89,13 @@
                      </graphic>
                   </Button>
                   <Pane prefHeight="359.0" prefWidth="57.0" />
-                  <Button disable="true" mnemonicParsing="false" prefHeight="322.0" prefWidth="333.0" style="-fx-background-color: #11e3fa;">
+                  <Button disable="true" mnemonicParsing="false" prefHeight="322.0" prefWidth="333.0" style="-fx-background-color: #eb7d6c;" styleClass="widget-button">
                      <font>
                         <Font size="48.0" />
                      </font>
                   </Button>
                   <Pane prefHeight="359.0" prefWidth="57.0" />
-                  <Button disable="true" mnemonicParsing="false" prefHeight="322.0" prefWidth="333.0" style="-fx-background-color: #11e3fa;">
+                  <Button disable="true" mnemonicParsing="false" prefHeight="322.0" prefWidth="333.0" style="-fx-background-color: #eb7d6c;" styleClass="widget-button">
                      <font>
                         <Font size="48.0" />
                      </font>
