@@ -33,13 +33,13 @@ public class ControllerDashboard {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
         System.out.println("\n\n" + connection.getEmployee().getEmployeeStatus() + "\n\n");
-        if(connection.getEmployee().getEmployeeStatus() != 'a'){
+        if(TempStorage.employee.getEmployeeStatus().charAt(0) != 'a'){
             adminbtn.setDisable(true);
         }
     }
     public void setGreet(){
         System.out.println("Setting greet");
-        greet.setText("Welcome, " + connection.getEmployee().getEmployeeFname() + " " + connection.getEmployee().getEmployeeLname() + "!  ");
+        greet.setText("Welcome, " + TempStorage.employee.getEmployeeFname() + " " + TempStorage.employee.getEmployeeLname() + "!  ");
     }
     private void updateClock() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
@@ -50,7 +50,7 @@ public class ControllerDashboard {
 
     @FXML
     protected void clickOutClicked() throws IOException {
-        connection.clockOut();
+        new ApiClient().clockOut();
         System.out.println("Clocking out");
         Stage stage = (Stage) clockOut.getScene().getWindow();
         stage.close();

@@ -1,5 +1,6 @@
 package com.example.posjohonnyjavatecspring2023;
 
+import com.example.posjohonnyjavatecspring2023.DTO.FoodDto;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -39,17 +40,17 @@ public class ControllerIngrediants {
         quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1));
     }
 
-    public void setIngrediantList(ObjectFood food){
+    public void setIngrediantList(FoodDto food){
         identifier.setText(food.getFoodName());
         foodId.setText(food.getFoodId() + "");
         try {
-            this.food.setImage(new Image(food.getUrl()).isError() ? new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-0.png", 168, 89, false, true) : new Image(food.getUrl(), 168, 89, false, true));
+            this.food.setImage(new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-"+food.getFoodId()+".png", 168, 89, false, true));
         } catch (Exception e) {
-            this.food.setImage(new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-1.png", 168, 89, false, true));
+            this.food.setImage(new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-0.png", 168, 89, false, true));
         }
-        costS.setText(food.getPrice() + " $");
-        System.out.println(food.getIngrediants().length);
-        for (String ingrediant : food.getIngrediants()) {
+        costS.setText(food.getFoodPrice() + " $");
+        System.out.println(food.getIngredients().size());
+        for (String ingrediant : food.getIngredients()) {
             CheckBox checkBox = new CheckBox(ingrediant);
 
             checkBox.setScaleX(1);

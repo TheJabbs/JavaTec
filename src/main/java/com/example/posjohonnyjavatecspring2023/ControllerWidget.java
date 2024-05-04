@@ -1,6 +1,7 @@
 package com.example.posjohonnyjavatecspring2023;
 
 
+import com.example.posjohonnyjavatecspring2023.DTO.FoodDto;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -21,21 +22,21 @@ public class ControllerWidget {
     @FXML
     private AnchorPane widget;
 
-    private ObjectFood food;
+    private FoodDto food;
     ControllerCashier cashierC;
 
     public void initialize() {
 
     }
 
-    public void setWidget(ObjectFood food) {
+    public void setWidget(FoodDto food) {
         fname.setText(food.getFoodName());
         try {
-            image.setImage(new Image(food.getUrl()).isError() ? new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-0.png", 168, 89, false, true) : new Image(food.getUrl(), 168, 89, false, true));
+            image.setImage(new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-"+food.getFoodId()+".png", 168, 89, false, true));
         } catch (Exception e) {
             image.setImage(new Image("com/example/posjohonnyjavatecspring2023/Image Food/image-0.png", 168, 89, false, true));
         }
-        price.setText(food.getPrice() + " $");
+        price.setText(food.getFoodPrice() + " $");
         this.food = food;
     }
 

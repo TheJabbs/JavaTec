@@ -7,5 +7,5 @@ import java.util.List;
 
 public class TempStorage {
     public static EmployeeEntity employee = new EmployeeEntity();
-    public static int restaurantId = 0, dRate = 0;
+    public static int restaurantId = 1, dRate = 15000;
 }

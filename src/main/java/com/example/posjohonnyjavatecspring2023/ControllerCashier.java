@@ -1,5 +1,6 @@
 package com.example.posjohonnyjavatecspring2023;
 
+import com.example.posjohonnyjavatecspring2023.DTO.FoodDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -54,7 +55,7 @@ public class ControllerCashier {
     private Label returnL, returnD;
 
     private final DatabaseConnection connection = getDefaultToken();
-    ObservableList<ObjectFood> foodL = FXCollections.observableArrayList();
+    ObservableList<FoodDto> foodL = FXCollections.observableArrayList();
     ObservableList<ObjectOrder> orders = FXCollections.observableArrayList();
 
 
@@ -71,7 +72,7 @@ public class ControllerCashier {
 
     private void showWidget() {
 
-        foodL = connection.getAllFood();
+        foodL = FXCollections.observableArrayList(new ApiClient().getAllFood(TempStorage.restaurantId));
         int[][] insert = new int[2][4];
 
         gridB.getRowConstraints().clear();
@@ -89,16 +90,16 @@ public class ControllerCashier {
                 Node fxmlNode = loader.load();
                 ControllerWidget controller = loader.getController();
                 controller.setCashierC(this);
-                ObjectFood food = foodL.get(i);
+                FoodDto food = foodL.get(i);
                 controller.setWidget(food);
 
-                if (food.getFoodCategory() == 's') {
+                if (food.getFoodCategories().get(0) == 's') {
                     gridOffers.add(fxmlNode, insert[0][0]++, insert[1][0]);
-                } else if (food.getFoodCategory() == 'd') {
+                } else if (food.getFoodCategories().get(0) == 'd') {
                     gridD.add(fxmlNode, insert[0][1]++, insert[1][1]);
-                } else if (food.getFoodCategory() == 'm') {
+                } else if (food.getFoodCategories().get(0) == 'm') {
                     gridB.add(fxmlNode, insert[0][2]++, insert[1][2]);
-                } else if (food.getFoodCategory() == 'c') {
+                } else if (food.getFoodCategories().get(0) == 'c') {
                     gridC.add(fxmlNode, insert[0][3]++, insert[1][3]);
                 } else {
                     System.out.println("The food category is not valid");

@@ -106,5 +106,28 @@ public class ApiClient {
             e.printStackTrace();
         }
     }
+
+    public void clockOut() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("employeeUsername", employee.getEmployeeUsername());
+        jsonObject.put("employeePassword", employee.getEmployeePassword());
+
+        RequestBody body = RequestBody.create(jsonObject.toString(), MediaType.parse("application/json"));
+        Request request = new Request.Builder()
+                .url("http://localhost:8080/api/v1/labors/end")
+                .post(body)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                System.out.println("Clocked out");
+            } else {
+                System.out.println("Failed to clock out: " + response);
+            }
+        } catch (IOException e) {
+            System.out.println("Error during HTTP call:");
+            e.printStackTrace();
+        }
+    }
 }
 
