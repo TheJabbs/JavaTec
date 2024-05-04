@@ -35,18 +35,36 @@ public class ControllerLogIn {
         if(usernameI.getText().isBlank() || passwordI.getText().isBlank()) {
             errorL.setText("Please enter your username and password.");
         } else{
-            if(connection.validateEmployee(usernameI.getText(), passwordI.getText())){
-                System.out.println("Success!");
-                closeBtnClicked();
-                Stage dashboardStage = new Stage();
-                new Main().showDashboardStage(dashboardStage);
-                dashboardStage.setOnHidden(e -> {
-                            System.out.println("Closing the dashboard");
-                            connection.clockOut();
-                        });
-                connection.clockIn();
-            }else {
-                errorL.setText("Invalid username or password.");
+//            if(connection.validateEmployee(usernameI.getText(), passwordI.getText())){
+//                System.out.println("Success!");
+//                closeBtnClicked();
+//                Stage dashboardStage = new Stage();
+//                new Main().showDashboardStage(dashboardStage);
+//                dashboardStage.setOnHidden(e -> {
+//                            System.out.println("Closing the dashboard");
+//                            connection.clockOut();
+//                        });
+//                connection.clockIn();
+//            }else {
+//                errorL.setText("Invalid username or password.");
+//            }
+            ApiClient apiClient = new ApiClient();
+            try {
+                if(apiClient.auth(usernameI.getText(), passwordI.getText())){
+                    System.out.println("Success!");
+                    closeBtnClicked();
+                    Stage dashboardStage = new Stage();
+                    new Main().showDashboardStage(dashboardStage);
+                    dashboardStage.setOnHidden(e -> {
+                        System.out.println("Closing the dashboard");
+                        connection.clockOut();
+                    });
+                    apiClient.clockIn();
+                }else {
+                    errorL.setText("Invalid username or password.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

@@ -5,7 +5,7 @@ import java.util.Date;
 public class ObjectEmployee {
     private int employeeId;
     private String employeeFname;
-    private String employeeLname;
+    private String employeeLname, password;
     private char employeeStatus;
 
     // Constructors
@@ -13,14 +13,23 @@ public class ObjectEmployee {
         // Default constructor
     }
 
-    public ObjectEmployee(int employeeId, String employeeFname, String employeeLname, char employeeStatus) {
+    public ObjectEmployee(int employeeId, String employeeFname, String employeeLname, char employeeStatus, String password) {
         this.employeeId = employeeId;
         this.employeeFname = employeeFname;
         this.employeeLname = employeeLname;
         this.employeeStatus = employeeStatus;
+        this.password = password;
     }
 
     // Getters
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public int getEmployeeId() {
         return employeeId;
     }

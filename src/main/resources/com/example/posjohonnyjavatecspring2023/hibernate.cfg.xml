@@ -1,0 +1,40 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3307/pos_db</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">1234</property>
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheRegionFactoryAvailableException</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- Names the annotated entity class -->
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.EmployeeEntity"/>
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.FoodCategoryEntity"/>
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.FoodEntity"/>
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.IngrediantEntity"/>
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.IngrediantNamesEntity"/>
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.LaborEntity"/>
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.OrderlistEntity"/>
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.OrdersEntity"/>
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.RestaurantEntity"/>
+        <mapping class="com.example.posjohonnyjavatecspring2023.Entity.TokenEntity"/>
+    </session-factory>
+</hibernate-configuration>

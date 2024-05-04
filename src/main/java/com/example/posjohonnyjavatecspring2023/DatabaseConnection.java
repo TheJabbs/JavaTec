@@ -13,7 +13,7 @@ public class DatabaseConnection {
     private final ObjectEmployee user = new ObjectEmployee();
     private final String jdbcUrl = "jdbc:mysql://127.0.0.1:3307/pos_db";
     private final String username = "root";
-    private final String password = "1234";
+    private final String password = "";
 
     public int getRestaurantId() {
         return restaurantId;
