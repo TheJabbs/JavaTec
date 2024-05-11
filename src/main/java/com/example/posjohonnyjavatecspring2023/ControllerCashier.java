@@ -1,6 +1,7 @@
 package com.example.posjohonnyjavatecspring2023;
 
 import com.example.posjohonnyjavatecspring2023.DTO.FoodDto;
+import com.example.posjohonnyjavatecspring2023.Entity.OrdersEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.posjohonnyjavatecspring2023.Main.getDefaultToken;
 
@@ -121,13 +123,13 @@ public class ControllerCashier {
         totalPL.setText("" + total * getDefaultToken().getdRate());
     }
 
-    public void updateTable(){
+    public void updateTable() {
         receipTable.setItems(orders);
         calculateTotal();
     }
 
     @FXML
-    public void displayChange(){
+    public void displayChange() {
         double payedD = this.payedD.getText().isEmpty() ? 0 : (Double.parseDouble(this.payedD.getText().trim()));
         double payedL = this.payedL.getText().isEmpty() ? 0 : (Double.parseDouble(this.payedL.getText().trim()));
 
@@ -136,13 +138,13 @@ public class ControllerCashier {
 
         double totalPD = Double.parseDouble(this.totalPD.getText());
 
-        double change = (payedD + payedL/getDefaultToken().getdRate()) - totalPD;
+        double change = (payedD + payedL / getDefaultToken().getdRate()) - totalPD;
         double rate = getDefaultToken().getdRate();
 
-        if(change < 0){
+        if (change < 0) {
             returnD.setText("-1");
             returnL.setText("-1");
-        }else if(payedD > payedL){
+        } else if (payedD > payedL) {
             returnD.setText((change - (change % 5)) + "");
             returnL.setText(((change % 5) * rate) + "");
         } else if (payedL >= (payedD * rate)) {
@@ -153,7 +155,7 @@ public class ControllerCashier {
     }
 
     @FXML
-    public void clearTable(){
+    public void clearTable() {
         orders = FXCollections.observableArrayList();
         returnD.setText("0");
         returnL.setText("0");
@@ -164,23 +166,23 @@ public class ControllerCashier {
     }
 
     @FXML
-    public void payClicked(){
-        if(!returnD.getText().equals("-1") || !returnL.getText().equals("-1")){
+    public void payClicked() {
+        if (!returnD.getText().equals("-1") || !returnL.getText().equals("-1")) {
             for (ObjectOrder order : orders) {
                 connection.insertOrder(order);
             }
             clearTable();
         }
-
     }
 
     @FXML
-    public void deleteSelected(){
+    public void deleteSelected() {
         orders.remove(receipTable.getSelectionModel().getSelectedItem());
         updateTable();
     }
+
     @FXML
-    public void onBackClick(){
+    public void onBackClick() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard-view.fxml"));
             bPane.getScene().setRoot(loader.load());
@@ -192,6 +194,7 @@ public class ControllerCashier {
     public ObservableList<ObjectOrder> getOrderList() {
         return orders;
     }
+
     public BorderPane getbPane() {
         return bPane;
     }

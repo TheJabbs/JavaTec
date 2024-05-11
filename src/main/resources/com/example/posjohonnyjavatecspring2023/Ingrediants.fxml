@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="737.0" prefWidth="62.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.posjohonnyjavatecspring2023.ControllerIngrediants">
+<AnchorPane fx:id="mainPane" prefHeight="737.0" prefWidth="62.0" style="-fx-background-color: #fffba3;" stylesheets="@CSS/button.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.posjohonnyjavatecspring2023.ControllerIngrediants">
     <children>
         <VBox layoutX="8.0" prefHeight="737.0" prefWidth="460.0">
             <children>
@@ -46,7 +46,7 @@
                 <FlowPane fx:id="content" alignment="CENTER" prefHeight="452.0" prefWidth="451.0" />
                 <HBox alignment="CENTER" prefHeight="47.0" prefWidth="600.0">
                     <children>
-                        <Button fx:id="add" mnemonicParsing="false" onAction="#buttonClick" prefHeight="38.0" prefWidth="57.0" text="Add" />
+                        <Button fx:id="add" mnemonicParsing="false" onAction="#buttonClick" prefHeight="38.0" prefWidth="72.0" text="Add" />
                         <Spinner fx:id="quantity" prefHeight="38.0" prefWidth="73.0" />
                         <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="38.0" prefWidth="116.0" text="Cancel" />
                     </children>

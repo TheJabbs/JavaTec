@@ -1,8 +1,8 @@
 /* styles.css */
 
 .button {
-    -fx-background-color: #ff7f50; /* Coral */
-    -fx-text-fill: white;
+    -fx-background-color: #84cc6e; /* Coral */
+    -fx-text-fill: #000000;
     -fx-font-size: 14px;
     -fx-padding: 8px 16px; /* Adjust padding as needed */
     -fx-border-radius: 4px; /* Rounded corners */
@@ -11,11 +11,11 @@
 }
 
 .button:hover {
-    -fx-background-color: #ff6347; /* Darker coral on hover */
+    -fx-background-color: #fff647; /* Darker coral on hover */
 }
 
 .button:pressed {
-    -fx-background-color: #d1552c; /* Dark coral when pressed */
+    -fx-background-color: #d1c92c; /* Dark coral when pressed */
 }
 /* styles.css */
 
@@ -28,24 +28,24 @@
 
 /* Widget button style */
 .widget-button {
-    -fx-background-color: #3fe2e8; /* Button background color */
+    -fx-background-color: #fae144; /* Button background color */
     -fx-text-fill: white; /* Text color */
     -fx-font-size: 14px; /* Font size */
     -fx-font-weight: bold; /* Font weight */
     -fx-padding: 8px 16px; /* Padding */
     -fx-background-radius: 5px; /* Rounded corners */
     -fx-border-radius: 5px; /* Rounded corners */
-    -fx-border-color: #3fe2e8; /* Border color */
+    -fx-border-color: #d1fd4d; /* Border color */
     -fx-border-width: 2px; /* Border width */
     -fx-cursor: hand; /* Cursor on hover */
 }
 
 /* Hover effect */
 .widget-button:hover {
-    -fx-background-color: #31c5d4; /* Darker background color on hover */
+    -fx-background-color: #d4ae31; /* Darker background color on hover */
 }
 
 /* Pressed effect */
 .widget-button:pressed {
-    -fx-background-color: #28afb8; /* Even darker background color when pressed */
+    -fx-background-color: #b88f28; /* Even darker background color when pressed */
 }

@@ -1,5 +1,7 @@
 package com.example.posjohonnyjavatecspring2023;
 
+import com.example.posjohonnyjavatecspring2023.DTO.FoodDto;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +14,8 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerAdmin {
 
@@ -24,19 +26,19 @@ public class ControllerAdmin {
     private BorderPane bPane;
 
     @FXML
-    private TableColumn<ObjectFood, String> category;
+    private TableColumn<FoodDto, String> category;
 
     @FXML
     private Button delBtn;
 
     @FXML
-    private TableColumn<ObjectFood, Double> foodCost;
+    private TableColumn<FoodDto, Double> foodCost;
 
     @FXML
-    private TableColumn<ObjectFood, Integer> foodId;
+    private TableColumn<FoodDto, Integer> foodId;
 
     @FXML
-    private TableColumn<ObjectFood, String> foodName;
+    private TableColumn<FoodDto, String> foodName;
 
     @FXML
     private SplitMenuButton iCategory;
@@ -51,25 +53,28 @@ public class ControllerAdmin {
     private SplitMenuButton iIngrediants;
 
     @FXML
-    private TableColumn<ObjectFood, String> ingrediants;
+    private TableColumn<FoodDto, String> ingrediants;
 
     @FXML
-    private TableView<ObjectFood> menuItems;
+    private TableView<FoodDto> menuItems;
     @FXML
     private ImageView imageFood;
     @FXML
     private Label notice, back;
     private DatabaseConnection connection = Main.getDefaultToken();
+    private ApiClient apiClient = new ApiClient();
 
     public void initialize() {
         foodId.setCellValueFactory(new PropertyValueFactory<>("foodId"));
         foodName.setCellValueFactory(new PropertyValueFactory<>("foodName"));
-        foodCost.setCellValueFactory(new PropertyValueFactory<>("price"));
-        category.setCellValueFactory(new PropertyValueFactory<>("foodCategory"));
+        foodCost.setCellValueFactory(new PropertyValueFactory<>("foodPrice"));
+        category.setCellValueFactory(foodDtoCharacterCellDataFeatures -> foodDtoCharacterCellDataFeatures.getValue().foodCategoriesProperty());
         ingrediants.setCellValueFactory(cellData -> cellData.getValue().ingrediantsProperty());
 
-        ObservableList foods = connection.getAllFood();
-        menuItems.setItems(foods);
+        List<FoodDto> listFood = apiClient.getAllFood(TempStorage.restaurantId);
+        ObservableList<FoodDto> observableList = FXCollections.observableArrayList(listFood);
+
+        menuItems.setItems(observableList);
 
         iIngrediants.getItems().addAll(connection.getAllIngrediantNames());
 
@@ -119,8 +124,8 @@ public class ControllerAdmin {
 
         if (!iFname.getText().isEmpty() && !categorie.isEmpty() && price > 0) {
             connection.addFood(iFname.getText(), price, ingrediants, categorie);
-            ObservableList foods = connection.getAllFood();
-            menuItems.setItems(foods);
+            ObservableList<FoodDto> observableList = FXCollections.observableArrayList(apiClient.getAllFood(TempStorage.restaurantId));
+            menuItems.setItems(observableList);
 
             System.out.println("Success");
             clearEntry();
@@ -145,11 +150,11 @@ public class ControllerAdmin {
 
     @FXML
     public void onDelClicked(){
-        ObjectFood food = menuItems.getSelectionModel().getSelectedItem();
+        FoodDto food = menuItems.getSelectionModel().getSelectedItem();
         if(food != null){
             connection.deleteFood(food.getFoodId());
-            ObservableList foods = connection.getAllFood();
-            menuItems.setItems(foods);
+            ObservableList<FoodDto> observableList = FXCollections.observableArrayList(apiClient.getAllFood(TempStorage.restaurantId));
+            menuItems.setItems(observableList);
         }
     }
 

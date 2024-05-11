@@ -1,6 +1,9 @@
 package com.example.posjohonnyjavatecspring2023.Entity;
 
+import com.example.posjohonnyjavatecspring2023.ApiClient;
 import jakarta.persistence.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -36,6 +39,24 @@ public class OrdersEntity {
     @ManyToOne
     @JoinColumn(name = "food_id", referencedColumnName = "food_id", nullable = false)
     private FoodEntity foodByFoodId;
+
+    public OrdersEntity() {
+    }
+
+    public OrdersEntity(int restaurantId, int employeeId, int foodId) {
+        this.restaurantId = restaurantId;
+        this.employeeId = employeeId;
+        this.foodId = foodId;
+    }
+
+    public StringProperty getFoodNameProperty() {
+        return new SimpleStringProperty(getFoodNameById());
+    }
+
+    public String getFoodNameById() {
+        return new ApiClient().getFoodNameById(foodId);
+    }
+
 
     public int getOrderId() {
         return orderId;

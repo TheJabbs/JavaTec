@@ -1,5 +1,6 @@
 package com.example.posjohonnyjavatecspring2023;
 
+import com.example.posjohonnyjavatecspring2023.DTO.EmployeeDto;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -8,6 +9,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static com.example.posjohonnyjavatecspring2023.TempStorage.employee;
 
 
 public class ControllerLogIn {
@@ -57,9 +60,10 @@ public class ControllerLogIn {
                     new Main().showDashboardStage(dashboardStage);
                     dashboardStage.setOnHidden(e -> {
                         System.out.println("Closing the dashboard");
-                        connection.clockOut();
+                        apiClient.clockOut(new EmployeeDto(employee.getEmployeeUsername(), employee.getEmployeePassword()));
                     });
-                    apiClient.clockIn();
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + employee.getEmployeeUsername() + " " + employee.getEmployeePassword());
+                    apiClient.clockIn(new EmployeeDto(employee.getEmployeeUsername(), employee.getEmployeePassword()));
                 }else {
                     errorL.setText("Invalid username or password.");
                 }

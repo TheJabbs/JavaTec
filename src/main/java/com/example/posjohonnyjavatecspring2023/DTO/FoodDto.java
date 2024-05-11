@@ -1,5 +1,9 @@
 package com.example.posjohonnyjavatecspring2023.DTO;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +67,30 @@ public class FoodDto {
 
     public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public StringProperty ingrediantsProperty() {
+        return new SimpleStringProperty(getIngrediantsAsString());
+    }
+
+    private String getIngrediantsAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (String ingredient : ingredients) {
+            sb.append(ingredient).append(", ");
+        }
+        return sb.toString();
+    }
+
+    public StringProperty foodCategoriesProperty() {
+        return new SimpleStringProperty(getFoodCategoriesAsString());
+    }
+
+    private String getFoodCategoriesAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (Character category : foodCategories) {
+            sb.append(category).append(", ");
+        }
+        return sb.toString();
     }
 }
 

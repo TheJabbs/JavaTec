@@ -1,6 +1,9 @@
 package com.example.posjohonnyjavatecspring2023;
 
+import com.example.posjohonnyjavatecspring2023.DTO.EmployeeDto;
 import com.example.posjohonnyjavatecspring2023.DTO.FoodDto;
+import com.example.posjohonnyjavatecspring2023.Entity.OrdersEntity;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
@@ -9,6 +12,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.posjohonnyjavatecspring2023.TempStorage.employee;
 
@@ -31,7 +35,8 @@ public class ApiClient {
                 String responseBody = response.body().string();
                 ObjectMapper objectMapper = new ObjectMapper();
                 // Assuming ObjectFood is correctly annotated to be parsed by Jackson
-                List<FoodDto> foods = objectMapper.readValue(responseBody, new TypeReference<List<FoodDto>>() {});
+                List<FoodDto> foods = objectMapper.readValue(responseBody, new TypeReference<List<FoodDto>>() {
+                });
                 System.out.println("Fetched data: " + foods);
                 return foods;
             } else {
@@ -71,23 +76,22 @@ public class ApiClient {
                 employee.setRestaurantId(jsonResponse.getInt("restaurantId"));
 
 
-
                 return employee.getEmployeeId() != 0;
             } else {
-                System.out.println(response.body().string() + "\n" + response.code()+
-                 "\n" + response.toString());
+                System.out.println(response.body().string() + "\n" + response.code() +
+                        "\n" + response.toString());
                 return false;
             }
-        }catch (JSONException | IOException e){
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public void clockIn() {
+    public boolean clockIn(EmployeeDto employeeDto) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("employeeUsername", employee.getEmployeeUsername());
-        jsonObject.put("employeePassword", employee.getEmployeePassword());
+        jsonObject.put("employeeUsername", employeeDto.getEmployeeUsername());
+        jsonObject.put("employeePassword", employeeDto.getEmployeePassword());
 
         RequestBody body = RequestBody.create(jsonObject.toString(), MediaType.parse("application/json"));
         Request request = new Request.Builder()
@@ -98,24 +102,58 @@ public class ApiClient {
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 System.out.println("Clocked in");
+                return true;
             } else {
                 System.out.println("Failed to clock in: " + response);
+                return false;
             }
         } catch (IOException e) {
             System.out.println("Error during HTTP call:");
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void clockOut() {
+    public boolean clockOut(EmployeeDto employeeDto) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("employeeUsername", employee.getEmployeeUsername());
-        jsonObject.put("employeePassword", employee.getEmployeePassword());
+        jsonObject.put("employeeUsername", employeeDto.getEmployeeUsername());
+        jsonObject.put("employeePassword", employeeDto.getEmployeePassword());
 
         RequestBody body = RequestBody.create(jsonObject.toString(), MediaType.parse("application/json"));
         Request request = new Request.Builder()
                 .url("http://localhost:8080/api/v1/labors/end")
-                .post(body)
+                .put(body)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                System.out.println("Clocked out");
+                return true;
+            } else {
+                System.out.println("Failed to clock out: " + response);
+                return false;
+            }
+        } catch (IOException e) {
+            System.out.println("Error during HTTP call:");
+            e.printStackTrace();
+            return false;
+
+        }
+    }
+
+    public void endAllLabors(List<EmployeeDto> e){
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = null;
+        try {
+            json = objectMapper.writeValueAsString(e);
+        } catch (JsonProcessingException jsonProcessingException) {
+            jsonProcessingException.printStackTrace();
+        }
+
+        RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+        Request request = new Request.Builder()
+                .url("http://localhost:8080/api/v1/labors/end/all")
+                .put(body)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -124,10 +162,62 @@ public class ApiClient {
             } else {
                 System.out.println("Failed to clock out: " + response);
             }
-        } catch (IOException e) {
-            System.out.println("Error during HTTP call:");
-            e.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
     }
+
+    public boolean createOrder(List<ObjectOrder> order){
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = null;
+        try {
+            json = objectMapper.writeValueAsString(order);
+        } catch (JsonProcessingException jsonProcessingException) {
+            jsonProcessingException.printStackTrace();
+        }
+
+        RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+        Request request = new Request.Builder()
+                .url("http://localhost:8080/api/v1/orderss/insertAll")
+                .post(body)
+                .build();
+
+        System.out.println("Request: " + request + "\n" + "Body: " + body + "\n" + "Json: " + json);
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                System.out.println("Order created");
+                return true;
+            } else {
+                System.out.println("Failed to create order: " + response);
+                return false;
+            }
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public String getFoodNameById(Integer id){
+        Request request = new Request.Builder()
+                .url("http://localhost:8080/api/v1/foods/foodName/" + id)
+                .get()
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful() && response.body() != null) {
+                return response.body().string();
+            } else {
+                System.out.println("Failed to fetch data: " + response);
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("Error during HTTP call:");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
 

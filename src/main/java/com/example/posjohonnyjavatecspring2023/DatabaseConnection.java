@@ -1,5 +1,6 @@
 package com.example.posjohonnyjavatecspring2023;
 
+import com.example.posjohonnyjavatecspring2023.Entity.OrdersEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DatabaseConnection {
-    private int restaurantId, dRate, orderNumber;
+    private int restaurantId, dRate, orderNumber = 30;
     private final ObjectEmployee user = new ObjectEmployee();
     private final String jdbcUrl = "jdbc:mysql://127.0.0.1:3307/pos_db";
     private final String username = "root";
@@ -211,7 +212,7 @@ public class DatabaseConnection {
         return FXCollections.observableArrayList();
     }
 
-    public String[] getIngrediant(int food_id) {
+    private String[] getIngrediant(int food_id) {
         String querry = "Select ingrediant_name " +
                 "from ingrediant_names join ingrediant " +
                 "on ingrediant_names.ingrediant_names_id = ingrediant.ingrediant_names_id " +
@@ -248,9 +249,10 @@ public class DatabaseConnection {
         String querry = "Insert into orders (restaurant_id, employee_id, food_id, order_number) values (?,?,?,?)";
         try (Connection connection = DriverManager.getConnection(jdbcUrl, this.username, this.password);
              PreparedStatement statement = connection.prepareStatement(querry)) {
-            statement.setInt(1, restaurantId);
-            statement.setInt(2, user.getEmployeeId());
+            statement.setInt(1, TempStorage.restaurantId);
+            statement.setInt(2, TempStorage.employee.getEmployeeId());
             statement.setInt(3, order.getId());
+            orderNumber++;
             statement.setInt(4, orderNumber);
             statement.executeUpdate();
             insertOrderList(order);
